@@ -52,11 +52,12 @@ public class DbConnect {
     }
 
     //add new user
-    public void createNewUserDbTable(String insertSQL) throws SQLException {
+   public void createNewUserDbTable(String insertSQL) throws SQLException {
 
         String insertTableSQL = "INSERT INTO " + nameDB +
                 "(USERNAME, EMAIL,PASS) " + "VALUES ";
 
+        // System.out.println(insertTableSQL+ insertSQL); // проверка запроса
         // System.out.println(insertTableSQL+ insertSQL); // проверка запроса
 
 
