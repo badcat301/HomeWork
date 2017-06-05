@@ -53,7 +53,6 @@ public class Registration implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         dbConnect.dBCheck();
@@ -74,14 +73,19 @@ public class Registration implements Initializable {
         dialog.setHeaderText("Пользователь существует." + "\n" + "Введите другой Email");
         dialog.showAndWait();
     }
-// этот метод неработает
+
+    // этот метод неработает
     private void secondStageLoad() throws IOException {
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("autorize.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.show();
+
+
     }
 
-   }
+}
 
