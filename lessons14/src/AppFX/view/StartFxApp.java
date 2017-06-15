@@ -1,5 +1,7 @@
 package AppFX.view;
 
+import AppFX.controller.Autorize;
+import AppFX.controller.Registration;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,12 +14,10 @@ import javafx.stage.Stage;
 public class StartFxApp extends Application {
 
 
-
     public static void main(String[] args) {
         launch(args);
-       // controller.DbConnect dbConnect = new DbConnect();
+        // controller.DbConnect dbConnect = new DbConnect();
     }
-
 
 
     @Override
@@ -25,8 +25,15 @@ public class StartFxApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         fxmlLoader.setLocation(this.getClass().getResource("registration.fxml"));
-        //fxmlLoader.setLocation(this.getClass().getResource("autorize.fxml"));
         Pane pane = (Pane) fxmlLoader.load();
+
+//эта хрень дает закрыть окно регистрации
+       Registration controller = (Registration) fxmlLoader.getController();
+      controller.setPrevStage(primaryStage);
+
+
+
+
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
@@ -34,7 +41,6 @@ public class StartFxApp extends Application {
         primaryStage.setTitle("Registration");
         primaryStage.show();
     }
-
 
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="priceColumShop" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppFX.controller.MainShop">
+   <children>
+      <TableView fx:id="productTable" layoutX="55.0" layoutY="64.0" prefHeight="200.0" prefWidth="495.0">
+         <columns>
+            <TableColumn fx:id="nameColum" prefWidth="114.0" text="Name" />
+            <TableColumn fx:id="descriptionColum" prefWidth="114.0" text="Description" />
+            <TableColumn fx:id="typeColum" prefWidth="114.0" text="Type" />
+            <TableColumn fx:id="priceColum" prefWidth="114.0" text="Price$" />
+         </columns>
+      </TableView>
+      <Button fx:id="selest" layoutX="55.0" layoutY="319.0" mnemonicParsing="false" onAction="#select" prefHeight="40.0" prefWidth="100.0" text="Select" />
+      <Button fx:id="addProduct" layoutX="267.0" layoutY="319.0" mnemonicParsing="false" onAction="#addProduct" prefHeight="40.0" prefWidth="100.0" text="Add Product" />
+      <Button fx:id="quit" layoutX="449.0" layoutY="319.0" mnemonicParsing="false" onAction="#quit" prefHeight="40.0" prefWidth="100.0" text="QUIT" />
+   </children>
+</AnchorPane>

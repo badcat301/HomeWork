@@ -1,4 +1,4 @@
-package AppFX.controller;
+package AppFX.repository;
 
 import java.sql.*;
 
@@ -53,7 +53,7 @@ public class DbConnect {
     }
 
     //add new user
-   public void createNewUserDbTable(String insertSQL) throws SQLException {
+    public void createNewUserDbTable(String insertSQL) throws SQLException {
 
         String insertTableSQL = "INSERT INTO " + nameDB +
                 "(EMAIL,PASS) " + "VALUES ";
@@ -70,11 +70,25 @@ public class DbConnect {
 
     //поиск по БД
 
-    public  boolean findByDbTable(String s) throws SQLException {
+    public boolean findByDbTable(String email,String pass) throws SQLException {
+
+        String s1 = "SELECT * FROM " + nameDB + " WHERE EMAIL = '" + email + "'";
+        ResultSet resultSet = statement.executeQuery(s1);
+       // System.out.println(s1); // проверка запроса
+        while (resultSet.next()) {
+            if (email.equals(resultSet.getString("EMAIL"))) {
+                return true;
+            }
+
+
+        }
+        return false;
+    }
+    public boolean findByDbTable(String s) throws SQLException {
 
         String s1 = "SELECT * FROM " + nameDB + " WHERE EMAIL = '" + s + "'";
         ResultSet resultSet = statement.executeQuery(s1);
-       // System.out.println(s1); // проверка запроса
+        // System.out.println(s1); // проверка запроса
         while (resultSet.next()) {
             if (s.equals(resultSet.getString("EMAIL"))) {
                 return true;
@@ -84,6 +98,25 @@ public class DbConnect {
         }
         return false;
     }
+
+    public boolean autorizeFromDbTable(String email, String pass) throws SQLException {
+
+        String sql12 = "Select * from USERS where USERNAME=? and PASSWORD=?";
+
+
+            PreparedStatement pst = dbConnection.prepareStatement(sql12);
+            pst.setString(1, email.toString());
+            pst.setString(2, pass.toString());
+
+
+
+        if (email.equals(sql12)) {
+            return false;
+        }
+        return true;
+    }
 }
+
+
 
 

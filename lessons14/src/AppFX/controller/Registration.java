@@ -1,5 +1,6 @@
 package AppFX.controller;
 
+import AppFX.repository.DbConnect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,13 @@ public class Registration implements Initializable {
     @FXML
     PasswordField pass;
 
+    Stage prevStage;
+
+    public void setPrevStage(Stage stage) {
+        this.prevStage = stage;
+    }
+
+
     @FXML
     public void buttonReg(ActionEvent actionEvent) throws SQLException, IOException {
         addNewUserAndCheck();
@@ -35,8 +43,10 @@ public class Registration implements Initializable {
 
     @FXML
     public void logInButton1(ActionEvent actionEvent) throws IOException {
-        secondStageLoad();
+        autorizeStageLoad();
+        prevStage.close();
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         sqliteWork();
@@ -52,6 +62,7 @@ public class Registration implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void showDialog() {
         Alert dialog = new Alert(Alert.AlertType.INFORMATION);
         dialog.initStyle(StageStyle.UTILITY);
@@ -59,7 +70,8 @@ public class Registration implements Initializable {
         dialog.setHeaderText("Пользователь существует." + "\n" + "Введите другой Email");
         dialog.showAndWait();
     }
-    private void secondStageLoad() throws IOException {
+
+   public void autorizeStageLoad() throws IOException {
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/autorize.fxml"));
@@ -67,10 +79,14 @@ public class Registration implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.setTitle("LogIN");
+        stage.setResizable(false);
         stage.show();
 
 
     }
+
+
+
     private void addNewUserAndCheck() throws SQLException, IOException {
         final boolean found = dbConnect.findByDbTable(email.getText());
         if (found) {
@@ -81,8 +97,10 @@ public class Registration implements Initializable {
             String newUsers = "('" + email.getText() + "', '" + pass.getText() + "')";
             dbConnect.createNewUserDbTable(newUsers);
             dbConnect.getDBConnection().close();
-            secondStageLoad();
+            autorizeStageLoad();
         }
     }
+
+
 }
 
